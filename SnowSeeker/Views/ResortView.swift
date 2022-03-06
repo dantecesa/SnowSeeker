@@ -10,6 +10,7 @@ import SwiftUI
 struct ResortView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
+    @EnvironmentObject var favorites: Favorites
     
     let resort: Resort
     
@@ -76,6 +77,25 @@ struct ResortView: View {
         .alert(selectedFacility?.name ?? "More Information", isPresented: $showingFacility, presenting: selectedFacility) { _ in
         } message: { facility in
             Text(facility.description)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if favorites.contains(resort) {
+                    Button(action: {
+                        favorites.remove(resort)
+                    }, label: {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                    })
+                } else {
+                    Button(action: {
+                        favorites.add(resort)
+                    }, label: {
+                        Image(systemName: "star")
+                            .foregroundColor(.secondary)
+                    })
+                }
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
     }
