@@ -10,12 +10,21 @@ import SwiftUI
 struct ContentView: View {
     let resorts: [Resort] = Bundle.main.decode("resorts.json")
     @State private var searchText: String = ""
+    @State private var selectedSort: String = "Alphabetical"
+    let sorts: [String] = ["Alphabetical", "Country", "Favorites"]
     
     @StateObject var favorites: Favorites = Favorites()
     
     var body: some View {
         NavigationView {
             List {
+                Picker("Sort Order", selection: $selectedSort) {
+                    ForEach(sorts, id:\.self) { sort in
+                        Text(sort)
+                    }
+                }
+                .pickerStyle(.segmented)
+                
                 ForEach(filteredResorts) { resort in
                     NavigationLink {
                         ResortView(resort: resort)
@@ -48,6 +57,7 @@ struct ContentView: View {
                                 favorites.remove(resort)
                             }, label: {
                                 Text("Unfavorite")
+                                    .foregroundColor(.primary)
                             })
                                 .tint(.gray)
                         } else {
@@ -55,6 +65,7 @@ struct ContentView: View {
                                 favorites.add(resort)
                             }, label: {
                                 Text("Favorite")
+                                    .foregroundColor(.primary)
                             })
                                 .tint(.yellow)
                         }
@@ -71,11 +82,36 @@ struct ContentView: View {
     }
     
     var filteredResorts: [Resort] {
+        var results: [Resort] = []
+        
         if searchText.isEmpty {
-            return resorts
+            results = resorts
         } else {
-            return resorts.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+            results = resorts.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
         }
+        
+        if selectedSort == "Alphabetical" {
+            results.sort { $0.name < $1.name }
+        } else if selectedSort == "Country" {
+            results.sort { $0.country < $1.country }
+        } else if selectedSort == "Favorites" {
+            var tempFavorites: [Resort] = []
+            var notFavorites: [Resort] = []
+            
+            for resort in resorts {
+                if favorites.contains(resort) {
+                    tempFavorites.insert(resort, at: 0)
+                } else {
+                    notFavorites.insert(resort, at: 0)
+                }
+            }
+            tempFavorites.sort { $0.name < $1.name }
+            notFavorites.sort { $0.name < $1.name }
+            
+            results = tempFavorites + notFavorites
+        }
+        
+        return results
     }
 }
  
