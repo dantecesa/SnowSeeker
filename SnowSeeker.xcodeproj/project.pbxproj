@@ -68,14 +68,9 @@
 			isa = PBXGroup;
 			children = (
 				6B9762D827D3357B00286FE6 /* SnowSeekerApp.swift */,
-				6B9762DA27D3357B00286FE6 /* ContentView.swift */,
-				6B9762EC27D3DD8800286FE6 /* WelcomeView.swift */,
-				6B9762EE27D3F3F600286FE6 /* ResortView.swift */,
-				6B9762F427D4494000286FE6 /* Facility.swift */,
-				6B9762F027D3F4CE00286FE6 /* SkiDetailsView.swift */,
-				6B9762F227D3F53A00286FE6 /* ResortDetailsView.swift */,
-				6B9762E827D3D39100286FE6 /* Resort.swift */,
-				6B9762EA27D3D49C00286FE6 /* Bundle-Decodable.swift */,
+				6B9762F627D44DC100286FE6 /* Views */,
+				6B9762F727D44DCB00286FE6 /* Models */,
+				6B9762F827D44DCE00286FE6 /* Helpers */,
 				6B9762E627D3D32A00286FE6 /* resorts.json */,
 				6B9762DC27D3357B00286FE6 /* Assets.xcassets */,
 				6B9762DE27D3357B00286FE6 /* Preview Content */,
@@ -89,6 +84,43 @@
 				6B9762DF27D3357B00286FE6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6B9762F627D44DC100286FE6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6B9762DA27D3357B00286FE6 /* ContentView.swift */,
+				6B9762EC27D3DD8800286FE6 /* WelcomeView.swift */,
+				6B9762EE27D3F3F600286FE6 /* ResortView.swift */,
+				6B9762F927D44DD700286FE6 /* Helper Views */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6B9762F727D44DCB00286FE6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6B9762F427D4494000286FE6 /* Facility.swift */,
+				6B9762E827D3D39100286FE6 /* Resort.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6B9762F827D44DCE00286FE6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6B9762EA27D3D49C00286FE6 /* Bundle-Decodable.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6B9762F927D44DD700286FE6 /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				6B9762F027D3F4CE00286FE6 /* SkiDetailsView.swift */,
+				6B9762F227D3F53A00286FE6 /* ResortDetailsView.swift */,
+			);
+			path = "Helper Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
